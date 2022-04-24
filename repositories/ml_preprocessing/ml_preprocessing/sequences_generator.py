@@ -66,14 +66,14 @@ class SequencesGenerator:
                 file_name = file.replace(".txt", "")
                 file_path = f"{self.raw_path}/{file}"
                 file_content = read_text_files(file_path)
-                file_sentences = nltk.tokenize.sent_tokenize(file_content)
+                # file_sentences = nltk.tokenize.sent_tokenize(file_content)
                 if not self.stopwords:
                     file_cleaned = cleaner_dataset.make_clean(
-                        file_sentences, stopwords=False
+                        file_content, stopwords=False
                     )
                 else:
                     file_cleaned = cleaner_dataset.make_clean(
-                        file_sentences, stopwords=True
+                        file_content, stopwords=True
                     )
                 with open(
                     self.sentences_files_path + file_name + "_sentences.pkl", "wb"
