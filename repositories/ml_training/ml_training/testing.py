@@ -10,4 +10,4 @@ document = f.read()
 a_list = nltk.tokenize.sent_tokenize(document)
 
 cleaner_dataset = Cleaner()
-print(cleaner_dataset.make_clean(a_list))
+print(cleaner_dataset.make_clean(a_list, stopwords=False))

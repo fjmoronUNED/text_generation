@@ -1,4 +1,5 @@
 import re
+from tracemalloc import stop
 from nltk import word_tokenize
 import yaml
 
@@ -12,7 +13,7 @@ class Cleaner:
             print("LIMPIADO LISTA")
 
     def get_stopwords(self):
-        with open(r"./es_stopwords.yaml") as file:
+        with open(r"./stopwords/es_stopwords.yaml") as file:
             self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
 
     def remove_accents(self, token):
@@ -53,7 +54,7 @@ class Cleaner:
     def clean_dataset(self, text_list):
         new_text = []
         for sentence in text_list:
-            clean_text = sentence.replace("\n", "")
+            clean_text = sentence.replace("\n", " ")
             new_text.append(clean_text)
         print("DATASET LIMPIADO")
         return new_text
@@ -71,7 +72,7 @@ class Cleaner:
         print("DATASET TOKENIZADO")
         return tokenized_sentences
 
-    def clean_tok_dataset(self, tokenized_sentences):
+    def clean_tok_dataset(self, tokenized_sentences, stopwords=False):
         """
         Clean token by token in a tokenized list
         """
@@ -86,8 +87,14 @@ class Cleaner:
                 token = self.remove_symbols(token)
                 token = self.remove_punctuations(token)
                 token = self.remove_numbers(token)
-                if len(token) > 2:
-                    sentences.append(token)
+                if stopwords:
+                    if len(token) > 2:
+                        sentences.append(token)
+                else:
+                    if token != "":
+                        sentences.append(token)
+                # if len(token) > 2:
+                #    sentences.append(token)
             clean_sentences.append(sentences)
 
         print("TOKENS LIMPIADOS")
@@ -97,6 +104,7 @@ class Cleaner:
         """
         Only Model_search. Remove stopwords from the sentences
         """
+        self.get_stopwords()
         clean_sentences = []
         for sentence in tokenized_sentences:
             sentences = []
@@ -130,6 +138,7 @@ class Cleaner:
         tok_dataset = self.tokenize_dataset(new_dataset)
         clean_dataset = self.clean_tok_dataset(tok_dataset)
         if stopwords:
-            clean_dataset = self.remove_stopwords(clean_dataset)
+            clean_tok_dataset = self.clean_tok_dataset(tok_dataset, stopwords=True)
+            clean_dataset = self.remove_stopwords(clean_tok_dataset)
         def_dataset = self.get_only_useful_sentences(clean_dataset)
         return def_dataset
