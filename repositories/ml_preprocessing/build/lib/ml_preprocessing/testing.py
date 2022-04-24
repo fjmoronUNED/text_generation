@@ -1,6 +1,9 @@
 import nltk
+import yaml
 
 from cleaner import Cleaner
+
+# from ml_preprocessing import STOPWORDS
 
 
 document = "/Users/fjmoronreyes/text_generation/repositories/datasets/jrr_tolkien-la-ultima-cancion-de-bilbo.txt"
