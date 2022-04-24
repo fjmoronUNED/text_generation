@@ -3,18 +3,15 @@ from tracemalloc import stop
 from nltk import word_tokenize
 import yaml
 
+from ml_preprocessing import STOPWORDS
+
+# LA FUNCIÓN DE STOPWORDS NO FUNCIONA
+
 
 class Cleaner:
-    def __init__(self, text_list=True):
-
-        if type(text_list) is str:
-            print("CLASE PENSADA PARA UNA LISTA")
-        if type(text_list) is list:
-            print("LIMPIADO LISTA")
-
-    def get_stopwords(self):
-        with open(r"./stopwords/es_stopwords.yaml") as file:
-            self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
+    # def get_stopwords(self):
+    #    with open("./stopwords/es_stopwords.yaml") as file:
+    #        self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
 
     def remove_accents(self, token):
         token = str(token)
@@ -93,8 +90,6 @@ class Cleaner:
                 else:
                     if token != "":
                         sentences.append(token)
-                # if len(token) > 2:
-                #    sentences.append(token)
             clean_sentences.append(sentences)
 
         print("TOKENS LIMPIADOS")
@@ -104,7 +99,9 @@ class Cleaner:
         """
         Only Model_search. Remove stopwords from the sentences
         """
-        self.get_stopwords()
+        with open("./stopwords/es_stopwords.yaml") as file:
+            self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
+        # self.get_stopwords()
         clean_sentences = []
         for sentence in tokenized_sentences:
             sentences = []
