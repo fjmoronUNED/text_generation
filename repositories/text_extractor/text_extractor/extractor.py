@@ -25,6 +25,7 @@ class TextExtractor:
             page = self.pdf.getPage(count)
             count += 1
             text += page.extractText()
+            print(text)
 
         return text
 

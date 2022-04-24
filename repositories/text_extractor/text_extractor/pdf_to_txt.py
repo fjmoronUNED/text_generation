@@ -1,13 +1,6 @@
 from extractor import TextExtractor
+import PyPDF2
 
-path = "/Users/fjmoronreyes/sp3ctrumV/backend/libraries/text_extractor/text_extractor/example.pdf"
-# path = "./example.pdf"
-
-# class TxtGenerator:
-#    def __init__(self):
-
+path = "/Users/fjmoronreyes/text_generation/repositories/datasets/jrr_tolkien-la-ultima-cancion-de-bilbo.pdf"
 document = TextExtractor(path)
-document.run_extraction()
-
-# with open("./roberto.txt", "w") as text_file:
-#    text_file.write(document.get_text())
+print(document.title)
