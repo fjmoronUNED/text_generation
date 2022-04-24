@@ -3,10 +3,12 @@ from tracemalloc import stop
 from nltk import word_tokenize
 import yaml
 
+from ml_preprocessing import STOPWORDS
+
 
 class Cleaner:
     def get_stopwords(self):
-        with open(r"./stopwords/es_stopwords.yaml") as file:
+        with open("./stopwords/es_stopwords.yaml") as file:
             self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
 
     def remove_accents(self, token):
@@ -86,8 +88,6 @@ class Cleaner:
                 else:
                     if token != "":
                         sentences.append(token)
-                # if len(token) > 2:
-                #    sentences.append(token)
             clean_sentences.append(sentences)
 
         print("TOKENS LIMPIADOS")
