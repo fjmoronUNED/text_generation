@@ -1,0 +1,5 @@
+PyPDF2
+textract
+#brew install tesseract
+pytesseract
+Pillow
