@@ -3,11 +3,13 @@ from tracemalloc import stop
 from nltk import word_tokenize
 import yaml
 
-from ml_preprocessing import STOPWORDS
+from ml_preprocessing import es_stopwords
+
+# LA FUNCIÓN DE STOPWORDS NO FUNCIONA
 
 
 class Cleaner:
-    def get_stopwords(self):
+    def get_stopwords(self):  # ERROR
         with open("./stopwords/es_stopwords.yaml") as file:
             self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -97,12 +99,12 @@ class Cleaner:
         """
         Only Model_search. Remove stopwords from the sentences
         """
-        self.get_stopwords()
+        # self.get_stopwords()
         clean_sentences = []
         for sentence in tokenized_sentences:
             sentences = []
             for token in sentence:
-                if token not in self.es_stopwords:
+                if token not in es_stopwords:
                     sentences.append(token)
             clean_sentences.append(sentences)
         print("STOPWORDS LIMPIADAS")
