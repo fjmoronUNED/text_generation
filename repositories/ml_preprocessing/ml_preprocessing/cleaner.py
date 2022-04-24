@@ -2,6 +2,7 @@ import re
 from tracemalloc import stop
 from nltk import word_tokenize
 import yaml
+import nltk
 
 from ml_preprocessing import es_stopwords
 
@@ -129,7 +130,8 @@ class Cleaner:
         return useful_sentences
 
     def make_clean(self, text, stopwords=False):
-        new_dataset = self.clean_dataset(text)
+        file_sentences = nltk.tokenize.sent_tokenize(text)
+        new_dataset = self.clean_dataset(file_sentences)
         tok_dataset = self.tokenize_dataset(new_dataset)
         clean_dataset = self.clean_tok_dataset(tok_dataset)
         if stopwords:
