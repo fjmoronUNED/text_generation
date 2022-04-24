@@ -28,8 +28,10 @@ print(file_cleaned)
 # test sequences_generator #
 ############################
 
+"""
 path = "/Users/fjmoronreyes/text_generation/repositories/datasets/"
 sequences = SequencesGenerator(path, stopwords=False)
 sequences.create_sentences_files()
 testing = sequences.get_sequences()
 print(testing)
+"""
