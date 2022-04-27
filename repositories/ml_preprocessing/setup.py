@@ -6,4 +6,5 @@ setuptools.setup(
     author="fjmoronreyes",
     description="package for preprocessing ML basic functions",
     packages=["ml_preprocessing"],
+    include_package_data=True
 )

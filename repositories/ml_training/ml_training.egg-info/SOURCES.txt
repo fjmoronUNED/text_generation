@@ -1,3 +1,4 @@
+MANIFEST.in
 README.txt
 setup.py
 ml_training/_init__.py
@@ -6,3 +7,6 @@ ml_training.egg-info/PKG-INFO
 ml_training.egg-info/SOURCES.txt
 ml_training.egg-info/dependency_links.txt
 ml_training.egg-info/top_level.txt
+ml_training/training/__init__.py
+ml_training/training/lstm_keras.py
+ml_training/training/config/lstm_keras_config.yaml

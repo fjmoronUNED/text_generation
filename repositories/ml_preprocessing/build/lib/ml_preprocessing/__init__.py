@@ -1,7 +1,5 @@
 import os
 import logging
-from cleaner import Cleaner
-from sequences_generator import SequencesGenerator
 
 logger = logging.getLogger("ml_preprocessing")
 
