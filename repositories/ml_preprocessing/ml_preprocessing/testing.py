@@ -3,7 +3,7 @@ import os
 import pickle
 import yaml
 
-from cleaner import Cleaner
+from ml_preprocessing.cleaner import Cleaner
 from sequences_generator import SequencesGenerator
 
 from ml_preprocessing import es_stopwords

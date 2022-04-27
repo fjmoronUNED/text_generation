@@ -1,5 +1,5 @@
 import os
-from cleaner import Cleaner
+from ml_preprocessing.cleaner import Cleaner
 import pickle as pkl
 import nltk
 

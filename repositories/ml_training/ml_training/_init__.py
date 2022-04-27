@@ -4,14 +4,10 @@ import pickle as pkl
 
 logger = logging.getLogger("ml_training")
 
-FILES_PATH = "/Users/fjmoronreyes/text_generation/repositories/datasets/"
-FILES_PATH_RAW = "/Users/fjmoronreyes/text_generation/repositories/datasets/raw_files"
-FILES_PATH_SENTENCES = (
-    "/Users/fjmoronreyes/text_generation/repositories/datasets/sentences_files"
-)
-FILES_PATH_SEQUENCES = (
-    "/Users/fjmoronreyes/text_generation/repositories/datasets/sequences_files"
-)
+FILES_PATH = "../../../datasets"
+FILES_PATH_RAW = "../../../datasets/raw_files"
+FILES_PATH_SENTENCES = "../../../datasets/sentences_files"
+FILES_PATH_SEQUENCES = "../../../datasets/sequences_files"
 
 
 def get_rolling_window_sequence(files_path_sequences):

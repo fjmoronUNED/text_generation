@@ -1,3 +1,4 @@
+MANIFEST.in
 README.txt
 setup.py
 ml_preprocessing/__init__.py
@@ -8,3 +9,4 @@ ml_preprocessing.egg-info/PKG-INFO
 ml_preprocessing.egg-info/SOURCES.txt
 ml_preprocessing.egg-info/dependency_links.txt
 ml_preprocessing.egg-info/top_level.txt
+ml_preprocessing/stopwords/es_stopwords.yaml
