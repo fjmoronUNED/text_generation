@@ -1,3 +1,7 @@
-from ml_training import FILES_PATH_SEQUENCES
+import os
 
-print(FILES_PATH_SEQUENCES)
+FILE_PATH = os.path.dirname(__file__)
+testing_dir = os.environ.get(
+    "TESTING", f"{FILE_PATH}/../inference"
+)
+print(testing_dir)

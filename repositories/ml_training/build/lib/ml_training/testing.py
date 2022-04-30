@@ -1,3 +1,4 @@
-from ml_training import FILES_PATH_SEQUENCES
+from ml_training.training import package_directory
 
-print(FILES_PATH_SEQUENCES)
+import os
+os.path.dirname(__file__)
