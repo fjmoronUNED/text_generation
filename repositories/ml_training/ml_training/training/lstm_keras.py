@@ -21,15 +21,10 @@ class LstmKerasTrainer:
         self.sequences_path = (
            "/Users/fjmoronreyes/text_generation/repositories/datasets/sequences_files"
         )
-        ''''''
-        # y luego en el codigo principal debes hacer esto, 
-        # no, cuando vayas a usar LstmKerasTrainer, para poder acceder a los ficheros, vas a text_generation
         # que acceder a esos ficheros primero accediendo al path de lmodulo sys.modules['ml_training'].__path__[1]
         # luego haces el join con el path que hayas declarado aqui, digamos que pones el path relativo, pero al pasarle el join
         # con el path del modulo, vas a tener el path final, y para exportar los ficheros con el modulo,
         # tienes que declarar el MANIFEST.in, y añadir en el setup, include_package_data
-        # no hay un comando para comentar=?
-        # presionmas cmd, luego k y luego c, la tecla de command de mac, luego K de la letra K y C
         # os.path.join(sys.modules['ml_training'].__path__[1], 'training/config/lstm_keras_config.yaml')
         self.sequences_path = "../../../datasets/sequences_files"
         self.config_path = "./config/lstm_keras_config.yaml"
@@ -147,6 +142,6 @@ class LstmKerasTrainer:
 
 
 trainer = LstmKerasTrainer()
-sentences = trainer.get_rolling_window_sequence()
-trainer.keras_embeddings(sentences)
-#trainer.train()
+#sentences = trainer.get_rolling_window_sequence()
+#trainer.keras_embeddings(sentences)
+trainer.train()

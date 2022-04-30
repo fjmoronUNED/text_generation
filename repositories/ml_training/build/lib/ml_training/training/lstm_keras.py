@@ -1,5 +1,6 @@
 import re
 import os
+from shlex import join
 import numpy as np
 import yaml
 import pickle as pkl
@@ -20,7 +21,12 @@ class LstmKerasTrainer:
         self.sequences_path = (
            "/Users/fjmoronreyes/text_generation/repositories/datasets/sequences_files"
         )
-        #self.sequences_path = "../../../datasets/sequences_files"
+        # que acceder a esos ficheros primero accediendo al path de lmodulo sys.modules['ml_training'].__path__[1]
+        # luego haces el join con el path que hayas declarado aqui, digamos que pones el path relativo, pero al pasarle el join
+        # con el path del modulo, vas a tener el path final, y para exportar los ficheros con el modulo,
+        # tienes que declarar el MANIFEST.in, y añadir en el setup, include_package_data
+        # os.path.join(sys.modules['ml_training'].__path__[1], 'training/config/lstm_keras_config.yaml')
+        self.sequences_path = "../../../datasets/sequences_files"
         self.config_path = "./config/lstm_keras_config.yaml"
         self.model_files = "/Users/fjmoronreyes/text_generation/repositories/ml_training/ml_training/inference/lstm_keras"
 
@@ -136,6 +142,6 @@ class LstmKerasTrainer:
 
 
 trainer = LstmKerasTrainer()
-sentences = trainer.get_rolling_window_sequence()
-trainer.keras_embeddings(sentences)
-#trainer.train()
+#sentences = trainer.get_rolling_window_sequence()
+#trainer.keras_embeddings(sentences)
+trainer.train()
