@@ -7,6 +7,7 @@ import pickle as pkl
 from ml_preprocessing.cleaner import Cleaner
 
 import tensorflow as tf
+tf.config.set_visible_devices([], 'GPU')
 
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Bidirectional, Dropout
@@ -142,7 +143,4 @@ class BiLstmKerasTrainer:
 
 
 trainer = BiLstmKerasTrainer()
-sentences = trainer.get_rolling_window_sequence()
-print(len(sentences))
-#trainer.keras_embeddings(sentences)
-#trainer.train()
+trainer.train()
