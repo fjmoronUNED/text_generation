@@ -5,4 +5,4 @@ loss_function: 'sparse_categorical_crossentropy'
 metrics: 'accuracy'
 padding: 'pre'
 training_portion: 0.8
-epochs: 40
+epochs: 10
