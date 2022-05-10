@@ -8,7 +8,6 @@ from ml_preprocessing import es_stopwords
 
 # LA FUNCIÓN DE STOPWORDS NO FUNCIONA
 
-
 class Cleaner:
     def get_stopwords(self):  # ERROR
         with open("./stopwords/es_stopwords.yaml") as file:
@@ -30,6 +29,7 @@ class Cleaner:
         token = re.sub("[”“''" "«»<>]", "", token)
         token = re.sub("[¿?()!¡]", "", token)
         token = re.sub("[~–|-]", "", token)
+        token = re.sub("—", "", token)
         token = re.sub("[\\\\/]", "", token)
         return token
 
@@ -81,10 +81,10 @@ class Cleaner:
                 token = str(token)
                 token = token.strip()
                 token = token.lower()
-                token = self.remove_accents(token)
+                #token = self.remove_accents(token)
                 token = self.remove_symbols(token)
                 token = self.remove_punctuations(token)
-                token = self.remove_numbers(token)
+                #token = self.remove_numbers(token)
                 if stopwords:
                     if len(token) > 2:
                         sentences.append(token)
