@@ -39,7 +39,7 @@ class Cleaner:
         token = re.sub("[@•�]", "", token)
         token = re.sub("[%#*]", "", token)
         token = re.sub("[¢€$]", "", token)
-        token = re.sub("[-=+÷∞]", "", token)
+        token = re.sub("[-=+÷∞—]", "", token)
         token = re.sub("[¬]", "", token)
         return token
 

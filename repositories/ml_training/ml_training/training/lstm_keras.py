@@ -53,7 +53,7 @@ class LstmKerasTrainer:
                     sentences = pkl.load(f)
                     for sentence in sentences:
                         complete_dataset.append(sentence)
-        return complete_dataset
+        return complete_dataset[:2000000]
 
     def keras_embeddings(self, sentences):
         """

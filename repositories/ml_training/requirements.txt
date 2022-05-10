@@ -1,3 +1,5 @@
 pytorch
 tensorflow
 transformers
+flair
+torch
