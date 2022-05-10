@@ -1,0 +1,14 @@
+model_name: 'datificate/gpt2-small-spanish'
+max_length: 128
+padding: 'max_length'
+truncation: true
+tensors: 'tf'
+
+
+embedding_dim: 40
+lstm_dim: 20
+learning_rate: 0.001
+loss_function: 'sparse_categorical_crossentropy'
+metrics: 'accuracy'
+training_portion: 0.8
+epochs: 40
