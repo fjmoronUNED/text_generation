@@ -37,6 +37,9 @@ class PredictKeras:
         else:
             print('Try with one of the following models: lstm, bilstm, gru')
 
+    def get_tokenizer(self):
+        print(self.tokenizer.word_index)
+
     def predict(self, seed_text):
         self.load_model()
         inverse_tokenizer = {v: k for k, v in self.tokenizer.word_index.items()}

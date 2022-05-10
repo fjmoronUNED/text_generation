@@ -83,6 +83,7 @@ class LstmKerasTrainer:
             )
         )
 
+        print(tokenizer.word_index)
         with open(self.model_files + "/tokenizer.pkl", "wb") as handle:
             pkl.dump(tokenizer, handle, protocol=pkl.HIGHEST_PROTOCOL)
         with open(self.model_files + "/max_len.txt", "w") as txt_f:
@@ -137,9 +138,9 @@ class LstmKerasTrainer:
     def train(self):
         sentences = self.get_rolling_window_sequence()
         encoded_train, encoded_val = self.keras_embeddings(sentences)
-        X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
-        model = self.lstm_keras(X, y, val_X, val_y)
-        return model
+        #X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
+        #model = self.lstm_keras(X, y, val_X, val_y)
+        #return model
 
 
 trainer = LstmKerasTrainer()
