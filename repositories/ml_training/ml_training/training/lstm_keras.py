@@ -4,7 +4,6 @@ from shlex import join
 import numpy as np
 import yaml
 import pickle as pkl
-from ml_preprocessing.cleaner import Cleaner
 
 import tensorflow as tf
 tf.config.set_visible_devices([], 'GPU')
@@ -15,21 +14,18 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
 
+from ml_preprocessing import SEQUENCES_FILES
+from ml_training import LSTM_FILES
+from ml_training import CONFIG
+
 
 class LstmKerasTrainer:
     def __init__(self, stopwords=False):
 
-        self.sequences_path = (
-           "/Users/fjmoronreyes/text_generation/repositories/datasets/sequences_files"
-        )
-        # que acceder a esos ficheros primero accediendo al path de lmodulo sys.modules['ml_training'].__path__[1]
-        # luego haces el join con el path que hayas declarado aqui, digamos que pones el path relativo, pero al pasarle el join
-        # con el path del modulo, vas a tener el path final, y para exportar los ficheros con el modulo,
-        # tienes que declarar el MANIFEST.in, y añadir en el setup, include_package_data
-        # os.path.join(sys.modules['ml_training'].__path__[1], 'training/config/lstm_keras_config.yaml')
-        self.sequences_path = "../../../datasets/sequences_files"
-        self.config_path = "./config/lstm_keras_config.yaml"
-        self.model_files = "/Users/fjmoronreyes/text_generation/repositories/ml_training/ml_training/inference/lstm_keras"
+
+        self.sequences_path = SEQUENCES_FILES
+        self.config_path = CONFIG + '/lstm_keras_config.yaml'
+        self.model_files = LSTM_FILES
 
         with open(self.config_path) as config_file:
             lstm_config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -44,12 +40,10 @@ class LstmKerasTrainer:
         self.epochs = lstm_config["epochs"]
 
     def get_rolling_window_sequence(self):
-        os.chdir(self.sequences_path)
-
         complete_dataset = []
-        for file in os.listdir():
+        for file in os.listdir(self.sequences_path):
             if file.endswith(".pkl"):
-                with open(file, "rb") as f:
+                with open(self.sequences_path + '/' + file, "rb") as f:
                     sentences = pkl.load(f)
                     for sentence in sentences:
                         complete_dataset.append(sentence)
@@ -140,9 +134,3 @@ class LstmKerasTrainer:
         X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
         model = self.lstm_keras(X, y, val_X, val_y)
         return model
-
-
-trainer = LstmKerasTrainer()
-#sentences = trainer.get_rolling_window_sequence()
-#trainer.keras_embeddings(sentences)
-trainer.train()

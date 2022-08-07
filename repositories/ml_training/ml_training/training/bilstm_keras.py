@@ -15,16 +15,17 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
 
+from ml_preprocessing import SEQUENCES_FILES
+from ml_training import BILSTM_FILES
+from ml_training import CONFIG
+
 
 class BiLstmKerasTrainer:
     def __init__(self, stopwords=False):
 
-        self.sequences_path = (
-           "/Users/fjmoronreyes/text_generation/repositories/datasets/sequences_files"
-        )
-        self.sequences_path = "../../../datasets/sequences_files"
-        self.config_path = "./config/bilstm_keras_config.yaml"
-        self.model_files = "/Users/fjmoronreyes/text_generation/repositories/ml_training/ml_training/inference/bilstm_keras"
+        self.sequences_path = SEQUENCES_FILES
+        self.config_path = CONFIG + '/bilstm_keras_config.yaml'
+        self.model_files = BILSTM_FILES
 
         with open(self.config_path) as config_file:
             bilstm_config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -41,12 +42,11 @@ class BiLstmKerasTrainer:
         self.epochs = bilstm_config["epochs"]
 
     def get_rolling_window_sequence(self):
-        os.chdir(self.sequences_path)
 
         complete_dataset = []
-        for file in os.listdir():
+        for file in os.listdir(self.sequences_path):
             if file.endswith(".pkl"):
-                with open(file, "rb") as f:
+                with open(self.sequences_path + '/' + file, "rb") as f:
                     sentences = pkl.load(f)
                     for sentence in sentences:
                         complete_dataset.append(sentence)
