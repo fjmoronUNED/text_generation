@@ -140,7 +140,3 @@ class BiLstmKerasTrainer:
         X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
         model = self.bilstm_keras(X, y, val_X, val_y)
         return model
-
-
-trainer = BiLstmKerasTrainer()
-trainer.train()

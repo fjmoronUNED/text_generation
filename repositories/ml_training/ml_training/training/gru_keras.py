@@ -135,9 +135,3 @@ class GruKerasTrainer:
         X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
         model = self.gru_keras(X, y, val_X, val_y)
         return model
-
-
-trainer = GruKerasTrainer()
-#sentences = trainer.get_rolling_window_sequence()
-#trainer.keras_embeddings(sentences)
-trainer.train()
