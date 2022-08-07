@@ -4,13 +4,12 @@ from nltk import word_tokenize
 import yaml
 import nltk
 
-from ml_preprocessing import es_stopwords
-
-# LA FUNCIÓN DE STOPWORDS NO FUNCIONA
+from ml_preprocessing import STOPWORDS
+from ml_preprocessing import DATASETS
 
 class Cleaner:
-    def get_stopwords(self):  # ERROR
-        with open("./stopwords/es_stopwords.yaml") as file:
+    def get_stopwords(self):
+        with open(STOPWORDS + '/es_stopwords.yaml') as file:
             self.es_stopwords = yaml.load(file, Loader=yaml.FullLoader)
 
     def remove_accents(self, token):
@@ -100,12 +99,11 @@ class Cleaner:
         """
         Only Model_search. Remove stopwords from the sentences
         """
-        # self.get_stopwords()
         clean_sentences = []
         for sentence in tokenized_sentences:
             sentences = []
             for token in sentence:
-                if token not in es_stopwords:
+                if token not in self.es_stopwords:
                     sentences.append(token)
             clean_sentences.append(sentences)
         print("STOPWORDS LIMPIADAS")
@@ -130,6 +128,9 @@ class Cleaner:
         return useful_sentences
 
     def make_clean(self, text, stopwords=False):
+        '''
+        Return list of cleaned tokenized text
+        '''
         file_sentences = nltk.tokenize.sent_tokenize(text)
         new_dataset = self.clean_dataset(file_sentences)
         tok_dataset = self.tokenize_dataset(new_dataset)

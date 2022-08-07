@@ -1,27 +1,27 @@
 import os
 from ml_preprocessing.cleaner import Cleaner
+from ml_preprocessing import DATASETS
+from ml_preprocessing import SENTENCES_FILES
+from ml_preprocessing import SEQUENCES_FILES
 import pickle as pkl
 import nltk
 
 
 class SequencesGenerator:
-    def __init__(self, files_path, stopwords=False):
+    def __init__(self, stopwords=False):
 
-        self.files_path = files_path
-        self.raw_path = files_path + "raw_files/"
         self.stopwords = stopwords
+
+        self.raw_path = DATASETS
+        self.sentences_files_path = SENTENCES_FILES
+        self.sequences_files_path = SEQUENCES_FILES
 
         if not os.path.isdir(self.raw_path):
             print("Error, se necesita un directorio para generar los archivos")
-        if not os.path.isdir(self.files_path + "sentences_files"):
-            os.makedirs(self.files_path + "sentences_files")
-            print("CREATING SENTENCES FILES FOLDER")
-        if not os.path.isdir(self.files_path + "sequences_files"):
-            os.makedirs(self.files_path + "sequences_files")
-            print("CREATING SEQUENCES FILES FOLDER")
-
-        self.sentences_files_path = files_path + "sentences_files/"  # hard coded
-        self.sequences_files_path = files_path + "sequences_files/"  # hard coded
+        if not os.path.isdir(self.sentences_files_path):
+            print("Error, se necesita un directorio para generar los archivos de frases")
+        if not os.path.isdir(self.sequences_files_path):
+            print("Error, se necesita un directorio para generar los archivos de secuencias")
 
     def sentences_to_sequences(self, sentences, train_len=8, min_sentence_size=2):
         """
@@ -59,29 +59,21 @@ class SequencesGenerator:
                 return f.read()
 
         cleaner_dataset = Cleaner()
-        os.chdir(self.raw_path)
 
-        for file in os.listdir():
+        for file in os.listdir(self.raw_path):
             if file.endswith(".txt"):
                 file_name = file.replace(".txt", "")
                 file_path = f"{self.raw_path}/{file}"
                 file_content = read_text_files(file_path)
-                #file_content = file_content.replace("—","")
                 if not self.stopwords:
                     file_cleaned = cleaner_dataset.make_clean(file_content)
                     print(file_cleaned)
                 else:
-                    file_cleaned = cleaner_dataset.make_clean(
-                        file_content, stopwords=True
-                    )
-                with open(
-                    self.sentences_files_path + file_name + "_sentences.pkl", "wb"
-                ) as f:
+                    file_cleaned = cleaner_dataset.make_clean(file_content, stopwords=True)
+                with open(self.sentences_files_path + '/' + file_name + "_sentences.pkl", "wb") as f:
                     pkl.dump(file_cleaned, f)
                 file_sequences = self.sentences_to_sequences(file_cleaned)
-                with open(
-                    self.sequences_files_path + file_name + "_sequences.pkl", "wb"
-                ) as f:
+                with open(self.sequences_files_path + '/' + file_name + "_sequences.pkl", "wb") as f:
                     pkl.dump(file_sequences, f)
         return file_cleaned
 
