@@ -106,7 +106,7 @@ class GruKerasTrainer:
         print("val_y shape: {}".format(val_y.shape))
         return X, y, val_X, val_y
 
-    def lstm_keras(self, X, y, val_X, val_y):
+    def gru_keras(self, X, y, val_X, val_y):
         """
         Create the neural network model for document wordpredict
         """
@@ -133,7 +133,7 @@ class GruKerasTrainer:
         sentences = self.get_rolling_window_sequence()
         encoded_train, encoded_val = self.keras_embeddings(sentences)
         X, y, val_X, val_y = self.train_test_sequences(encoded_train, encoded_val)
-        model = self.lstm_keras(X, y, val_X, val_y)
+        model = self.gru_keras(X, y, val_X, val_y)
         return model
 
 
