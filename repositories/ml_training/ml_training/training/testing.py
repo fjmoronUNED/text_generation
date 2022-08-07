@@ -1,18 +1,13 @@
 from transformers import TFAutoModel, AutoTokenizer, AutoConfig
 import tensorflow as tf
 
-model_name = "datificate/gpt2-small-spanish"
+from transformers import pipeline
 
-#tokenizer = AutoTokenizer.from_pretrained('./transformer_models/gpt2-small-spanish/tokenizer')
-#config = AutoConfig.from_pretrained('./transformer_models/gpt2-small-spanish/config.json')
-#model = TFAutoModel.from_pretrained('./transformer_models/gpt2-small-spanish/tf_model.h5', config=config)
+chef = pipeline(
+    "text-generation",
+    model="/Users/fjmoronreyes/text_generation/repositories/ml_training/ml_training/inference/gpt2_datificate_transformers",
+    tokenizer="datificate/gpt2-small-spanish",
+    # config={"max_length": 800},
+)
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-#tokenizer.save_pretrained('./transformer_models/gpt2-small-spanish/tokenizer')
-model = TFAutoModel.from_pretrained(model_name)
-text = 'hola a todos'
-
-inputs = tokenizer(text, return_tensors='tf')
-output = model(inputs)
-
-print(output['last_hidden_state'])
+print(chef("los hobbits se dirigían"))
