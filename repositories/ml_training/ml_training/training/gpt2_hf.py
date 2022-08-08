@@ -3,8 +3,7 @@ from transformers import TextDataset,DataCollatorForLanguageModeling
 from transformers import Trainer, TrainingArguments,AutoModelWithLMHead
 
 from ml_preprocessing import HF_FILES
-from ml_training import HF_DATIFICATE_MODEL
-from ml_training import GPT2_HF
+from ml_training import GPT2_HF, GPT2_FINE_TUNING
 import os
 
 class Gpt2Trainer:
@@ -12,7 +11,6 @@ class Gpt2Trainer:
 
         self.train_path = HF_FILES + '/train.txt'
         self.test_path = HF_FILES + '/test.txt'
-        self.hf_model = HF_DATIFICATE_MODEL
         self.model_files = GPT2_HF
 
         self.tokenizer = AutoTokenizer.from_pretrained("datificate/gpt2-small-spanish")
@@ -65,4 +63,7 @@ class Gpt2Trainer:
 
         print('Fine tuning has started train')
         trainer.train()
-        trainer.save_model()
+        trainer.save_model(GPT2_FINE_TUNING)
+
+trainer = Gpt2Trainer()
+trainer.train_model()
