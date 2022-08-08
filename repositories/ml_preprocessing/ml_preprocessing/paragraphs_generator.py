@@ -5,9 +5,7 @@ from ml_preprocessing import DATASETS
 from ml_preprocessing import PARAGRAPHS_FILES
 
 class ParagraphsGenerator:
-    def __init__(self, stopwords=False):
-
-        self.stopwords = stopwords
+    def __init__(self):
 
         self.raw_path = DATASETS
         self.paragraphs_files = PARAGRAPHS_FILES
