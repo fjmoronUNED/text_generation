@@ -9,7 +9,6 @@ class PredictKeras:
         self.model_name = model_name
         self.padding = 'pre'
 
-    def load_model(self):
         if self.model_name == 'lstm':
             self.model = load_model("./lstm_keras/model.h5")
             max_len_file = open("./lstm_keras/max_len.txt", "r")
@@ -41,9 +40,8 @@ class PredictKeras:
         print(self.tokenizer.word_index)
 
     def predict(self, seed_text):
-        self.load_model()
         inverse_tokenizer = {v: k for k, v in self.tokenizer.word_index.items()}
-        predictions = 10
+        predictions = 100
 
         text_generation = []
         for i in range(0, predictions):
@@ -56,12 +54,4 @@ class PredictKeras:
             word_predicted = inverse_tokenizer[indices]
             seed_text = seed_text + ' ' + word_predicted
             if i == predictions - 1:
-                print(seed_text)
                 return seed_text
-
-
-predicter = PredictKeras('lstm')
-#print()
-#predicter.load_model()
-seed_text = 'frodo y sam'
-predicter.predict(seed_text)
