@@ -1,0 +1,3 @@
+Total useful paragraphs: 2221
+Total tokens: 725483
+Token average x paragraph: 326
