@@ -27,7 +27,7 @@ class ParagraphsGenerator:
         paragraph_list = []
 
         for file in os.listdir(self.raw_path):
-            if file.endswith("Cuentos-Perdido-J-R-R-Tolkien.txt"):
+            if file.endswith("Numenor-y-la-Tier-J-R-R-Tolkien.txt"):
                 file_path = f"{self.raw_path}/{file}"
                 file_content = read_text_files(file_path)
                 paragraph = file_content.split('\n\n')
@@ -37,7 +37,7 @@ class ParagraphsGenerator:
         flat_paragraph_list = [item for sublist in paragraph_list for item in sublist]
         print('Número de párrafos totales {}'.format(len(flat_paragraph_list)))
 
-        with open(self.paragraphs_files + '/tolkien_paragraphs_cuentos_perdidos.pkl', "wb") as f:
+        with open(self.paragraphs_files + '/tolkien_paragraphs_numenor.pkl', "wb") as f:
             pkl.dump(flat_paragraph_list, f)
 
 creator = ParagraphsGenerator()

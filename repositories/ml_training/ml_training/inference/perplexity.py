@@ -38,13 +38,13 @@ def get_tolkien_paragraphs_base():
     return data
 
 def get_tolkien_paragraphs_validation():
-    with open(PARAGRAPHS_FILES + '/tolkien_paragraphs_cuentos_perdidos.pkl', 'rb') as f:
+    with open(PARAGRAPHS_FILES + '/tolkien_paragraphs_numenor.pkl', 'rb') as f:
         data = pkl.load(f)
 
     return data
 
 def get_seed_tolkien_paragraphs():
-    with open(PARAGRAPHS_FILES + '/seed_text_paragraphs_cuentos_perdidos.pkl', 'rb') as f:
+    with open(PARAGRAPHS_FILES + '/seed_text_paragraphs_numenor.pkl', 'rb') as f:
         data = pkl.load(f)
 
     return data
