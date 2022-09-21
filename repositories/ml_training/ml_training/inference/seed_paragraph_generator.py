@@ -4,7 +4,7 @@ from ml_preprocessing import PARAGRAPHS_FILES
 from nltk import word_tokenize
 
 def get_paragraphs():
-    with open(PARAGRAPHS_FILES + '/tolkien_paragraphs.pkl', 'rb') as f:
+    with open(PARAGRAPHS_FILES + '/tolkien_paragraphs_cuentos_perdidos.pkl', 'rb') as f:
         data = pkl.load(f)
     print('Total useful paragraphs: {}'.format(len(data)))
 
@@ -39,11 +39,11 @@ def save_tokenized_paragraphs():
     for sentence in data:
         tokenized_list.append(word_tokenize(sentence))
 
-    with open(PARAGRAPHS_FILES + '/tokenized_tolkien_paragraphs.pkl', "wb") as f:
+    with open(PARAGRAPHS_FILES + '/tokenized_tolkien_paragraphs_cuentos_perdidos.pkl', "wb") as f:
         pkl.dump(tokenized_list, f)
 
 def save_seed_texts():
-    with open(PARAGRAPHS_FILES + '/tokenized_tolkien_paragraphs.pkl', 'rb') as f:
+    with open(PARAGRAPHS_FILES + '/tokenized_tolkien_paragraphs_cuentos_perdidos.pkl', 'rb') as f:
         data = pkl.load(f)
 
     seed_text_list = []
@@ -51,7 +51,9 @@ def save_seed_texts():
     for i in data:
         seed_text_list.append(' '.join(i[:100]))
 
-    with open(PARAGRAPHS_FILES + '/seed_text_paragraphs.pkl', "wb") as f:
+    with open(PARAGRAPHS_FILES + '/seed_text_paragraphs_cuentos_perdidos.pkl', "wb") as f:
         pkl.dump(seed_text_list, f)
 
+get_paragraphs()
+save_tokenized_paragraphs
 save_seed_texts()
